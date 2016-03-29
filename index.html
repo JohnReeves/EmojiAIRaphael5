@@ -1,0 +1,125 @@
+#1. Last Worksheet
+
+![Imgur](http://i.imgur.com/zK4xZhV.png)
+
+Find and open your JSFiddle link from last week - as we're going to be breeding our emojis!
+
+#2. Breed Button
+
+Firstly, we're going to need to draw ourselves another button to "breed" our emojis. We've already created a "reset" button so our code is incredibly similar, except we're drawing it to the right:
+
+```js
+//draw "breed" button
+var breedButton = paper.rect(170, 20, 130, 40, 10);
+breedButton.attr("fill", "#bfbfbf");
+    
+var breedText = paper.text(230, 40, "Breed");
+breedText.attr("font-size", "24");
+    
+breedButton.click( function() {
+
+});
+```
+
+Inside the breed button click we're going to start by giving ourselves a clear piece of paper:
+
+```js
+paper.clear();
+```
+
+My code looks like this:
+
+![Imgur](http://i.imgur.com/uNLy9nU.png)
+
+#3. Breed Function
+
+We're going to create ourselves a breed function, which will handle all of the logic around breeding emojis:
+
+```js
+function breedEmojis(){
+
+}
+```
+
+We should then call this inside our breedButton, we should then also call drawShapes to draw our new baby emojis:
+
+```js
+breedEmojis();
+drawShapes();
+```
+
+My code looks like this:
+
+![Imgur](http://i.imgur.com/KSRKzA5.png)
+
+#4. Breed Function (part 2)
+
+Now we have a lovely function to do all our breeding logic, the first thing we need to do is copy out all the parentA and parentB attributes so we can use them to deicde our babys genetics.
+
+Firstly we need to get our parents from our selectedEmojis array:
+
+```js
+var parentA = selectedEmojis[0];
+var parentB = selectedEmojis[1];
+```
+
+We now need to some unecessary code to copy the properties of our object - we need to do this because of the way JavaScript "copies" objects. When we start over-writing our grid of emojis - that in turn would overwrite the "saved" selectedEmoji because it just copies the "reference" to the object, rather than copying the whole object.
+
+So we now need to temporarily copy all the properties of our parent like this:
+
+```js
+
+var A_fill = parentA.fill;
+var B_fill = parentB.fill;
+
+```
+
+You'll need to do this for *all* the properties for both parent A and parent B. After this we can clear the selectedEmojis array again - ready for the next generation!
+
+```js
+selectedEmojis = [];
+```
+
+My code looks like this:
+
+![Imgur](http://i.imgur.com/INzdMO2.png)
+
+#5. Genetics
+
+Next, we're going to need to loop over all our emojis again and give a "babyEmoji" attributes based on it's parents like this:
+
+```js
+for (var i = 0; i < emojis.length; i++) {
+  var babyEmoji = emojis[i];
+  
+}
+```
+
+So we know from Science class that genetics are a 50/50 chance as to whether you get your mother or your fathers genes. We can mock this in our project by using our `randomNumber` function to generate a number between 1 and 100 for each of our attributes.
+
+```js
+var fillChance = randomNumber(1, 100);
+```
+
+If this number is less than 50 wen can pick parentA's attribute, if it's above we can use parentB's :
+
+```js
+if (fillChance < 50){
+  babyEmoji.fill = A_fill;
+} else {
+ babyEmoji.fill = B_fill;
+}
+```
+
+You need to "roll the dice" for each attribute your emoji can have.
+
+My code looks like this:
+
+![Imgur](http://i.imgur.com/WJJgeFN.png)
+
+#6. Finishing
+
+Before you move onto the next worksheet make sure all of your emoji properties are being decided by parent emojis when they're bred!
+
+:star: When you've finished - don't forget to save your JSFiddle and send us your link above. :star2:
+
